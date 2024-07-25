@@ -28,6 +28,9 @@ const propertyController = {
 
 
       user_id = new mongoose.Types.ObjectId(req.userId);
+      let  user_id  = req.userId;
+      console.log(user_id);
+      user_id = new mongoose.Types.ObjectId(user_id);
       const userProperties = await Property.find({ user_id: user_id });
       return res
         .status(200)
@@ -111,12 +114,14 @@ const propertyController = {
       if (location) {
         filter.location = location
       }
-
-      if (property_type) {
+     
+console.log(property_type,location,price)
+      
+      if(property_type){
         filter.property_type = property_type
       }
 
-      if (price) {
+      if(price){
         filter.price = price
       }
 
