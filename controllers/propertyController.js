@@ -83,7 +83,8 @@ const propertyController = {
   },
   deleteProperty: async (req, res) => {
     try {
-      const { id } = req.params;
+      let { id } = req.params;
+      id = new mongoose.Types.ObjectId(id);
       await Property.findOneAndDelete(id);
       return res.status(200).json({ message: "Property deleted" });
     } catch (error) {
