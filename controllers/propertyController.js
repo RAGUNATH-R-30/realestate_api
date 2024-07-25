@@ -25,7 +25,7 @@ const propertyController = {
   },
   myProperty: async (req, res) => {
     try {
-      let  user_id  = req.userId;
+      let user_id  = req.userId;
       // user_id = new mongoose.Types.ObjectId(req.userId);
       // console.log(user_id);
       user_id = new mongoose.Types.ObjectId(user_id);
@@ -39,7 +39,7 @@ const propertyController = {
   },
 
   myPropertyById: async (req, res) => {
-    const { id } = req.params;
+    let { id } = req.params;
     try {
       id = new mongoose.Types.ObjectId(id);
       const userProperties = await Property.find({ _id: id });
@@ -84,6 +84,7 @@ const propertyController = {
   deleteProperty: async (req, res) => {
     try {
       const { property_id } = req.body;
+      console.log(property_id)
       const deletedProperty = await Property.findOneAndDelete(property_id);
       return res.status(200).json({ message: "Property deleted" });
     } catch (error) {
