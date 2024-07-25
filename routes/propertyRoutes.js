@@ -8,7 +8,7 @@ propertyRouter.post('/createproperty',auth.isAuth,propertyController.createPrope
 propertyRouter.get('/mypropertyid/:id', auth.isAuth, propertyController.myPropertyById)
 propertyRouter.get('/myproperty',auth.isAuth,propertyController.myProperty)
 propertyRouter.put('/editproperty',auth.isAuth,propertyController.editProperty)
-propertyRouter.delete('/deleteproperty',auth.isAuth,propertyController.deleteProperty)
+propertyRouter.delete('/deleteproperty/:id',auth.isAuth,propertyController.deleteProperty)
 propertyRouter.get('/allproperty',auth.isAuth,propertyController.allProperty)
 propertyRouter.get('/propertyfilter',auth.isAuth,propertyController.propertyFilter)
 

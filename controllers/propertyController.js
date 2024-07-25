@@ -83,9 +83,8 @@ const propertyController = {
   },
   deleteProperty: async (req, res) => {
     try {
-      const { property_id } = req.body;
-      console.log(property_id)
-      const deletedProperty = await Property.findOneAndDelete(property_id);
+      const { id } = req.params;
+      await Property.findOneAndDelete(id);
       return res.status(200).json({ message: "Property deleted" });
     } catch (error) {
       return res.status(500).json({ message: error.message });
