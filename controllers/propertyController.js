@@ -5,8 +5,8 @@ const User = require("../models/user");
 const propertyController = {
   createProperty: async (req, res) => {
     try {
-      const { property_type, location, price, description, user_id } = req.body;
-
+      const { property_type, location, price, description } = req.body;
+      let user_id = req.userId
       const newProperty = new Property({
         property_type: property_type,
         location: location,
@@ -25,9 +25,9 @@ const propertyController = {
   },
   myProperty: async (req, res) => {
     try {
-      let { user_id } = req.body;
-      console.log(user_id);
-      user_id = new mongoose.Types.ObjectId(user_id);
+
+
+      user_id = new mongoose.Types.ObjectId(req.userId);
       const userProperties = await Property.find({ user_id: user_id });
       return res
         .status(200)
@@ -36,6 +36,20 @@ const propertyController = {
       return res.status(500).json({ message: error.message });
     }
   },
+
+  myPropertyById: async (req, res) => {
+    const { id } = req.params;
+    try {
+      id = new mongoose.Types.ObjectId(id);
+      const userProperties = await Property.find({ _id: id });
+      return res
+        .status(200)
+        .json({ message: "Propertie Retrived", myproperty: userProperties });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  },
+  
   editProperty: async (req, res) => {
     try {
       const {
@@ -94,15 +108,15 @@ const propertyController = {
       let { property_type, price, location } = req.body;
       const filter = {};
 
-      if(location){
+      if (location) {
         filter.location = location
       }
 
-      if(property_type){
+      if (property_type) {
         filter.property_type = property_type
       }
 
-      if(price){
+      if (price) {
         filter.price = price
       }
 
