@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: "https://rrestate.netlify.app/",
+    origin: "https://rrestate.netlify.app",
     credentials: true,
   })
 );
