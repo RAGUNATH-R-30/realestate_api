@@ -25,11 +25,9 @@ const propertyController = {
   },
   myProperty: async (req, res) => {
     try {
-
-
-      user_id = new mongoose.Types.ObjectId(req.userId);
       let  user_id  = req.userId;
-      console.log(user_id);
+      // user_id = new mongoose.Types.ObjectId(req.userId);
+      // console.log(user_id);
       user_id = new mongoose.Types.ObjectId(user_id);
       const userProperties = await Property.find({ user_id: user_id });
       return res
